@@ -27,6 +27,8 @@ class JSONArrayField(models.TextField):
     def get_prep_value(self, value):
         if value is None:
             return '[]'
+        if isinstance(value, str):
+            return value
         return json.dumps(value)
 
 # Natural keys for buildings
