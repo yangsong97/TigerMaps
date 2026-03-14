@@ -1,7 +1,33 @@
 from django.db import models
-from django.contrib.postgres.fields import ArrayField
 from datetime import datetime
+import json
 import re
+
+try:
+    from django.contrib.postgres.fields import ArrayField
+    HAS_POSTGRES = True
+except ImportError:
+    HAS_POSTGRES = False
+
+
+class JSONArrayField(models.TextField):
+    """Fallback for ArrayField when PostgreSQL is not available."""
+    def from_db_value(self, value, expression, connection):
+        if value is None:
+            return []
+        return json.loads(value)
+
+    def to_python(self, value):
+        if isinstance(value, list):
+            return value
+        if value is None:
+            return []
+        return json.loads(value)
+
+    def get_prep_value(self, value):
+        if value is None:
+            return '[]'
+        return json.dumps(value)
 
 # Natural keys for buildings
 class BuildingManager(models.Manager):
@@ -45,7 +71,12 @@ class Section(models.Model):
     def __str__(self):
         return self.listings[1:]
 
+if HAS_POSTGRES:
+    _array_field = lambda: ArrayField(models.CharField(max_length=10, blank=True, null=True), default=list)
+else:
+    _array_field = lambda: JSONArrayField(default='[]')
+
 class User(models.Model):
     netid = models.CharField(max_length=20, blank=True, null=True)
-    courses = ArrayField(models.CharField(max_length=10, blank=True, null=True), default=list)
-    buildings = ArrayField(models.CharField(max_length=10, blank=True, null=True), default=list)
+    courses = _array_field()
+    buildings = _array_field()

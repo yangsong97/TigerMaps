@@ -228,7 +228,7 @@ def search_terms(query):
 
             # Many aliases are addresses that aren't often searched intentionally
             # For queries with a number, make sure it matches the entire building word
-            if re.search("\d", q):
+            if re.search(r"\d", q):
                 matches = matches | \
                           Q(building__names__iregex = "(^| |/)"+q+"($| |/)")
             else:
