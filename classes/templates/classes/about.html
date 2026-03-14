@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+
+{% load static %}
+
+<html lang="en">
+
+  <head>
+     <!-- add favicons -->
+    <link rel="apple-touch-icon" sizes="57x57" href="{% static 'classes/images/icons/apple-icon-57x57.png'%}">
+    <link rel="apple-touch-icon" sizes="60x60" href="{% static 'classes/images/icons/apple-icon-60x60.png'%}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{% static 'classes/images/icons/apple-icon-72x72.png'%}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{% static 'classes/images/icons/apple-icon-76x76.png'%}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{% static 'classes/images/icons/apple-icon-114x114.png'%}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{% static 'classes/images/icons/apple-icon-120x120.png'%}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{% static 'classes/images/icons/apple-icon-144x144.png'%}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{% static 'classes/images/icons/apple-icon-152x152.png'%}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'classes/images/icons/apple-icon-180x180.png'%}">
+    <link rel="icon" type="image/png" sizes="192x192"  href="{% static 'classes/images/icons/android-icon-192x192.png'%}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'classes/images/icons/favicon-32x32.png'%}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{% static 'classes/images/icons/favicon-96x96.png'%}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'classes/images/icons/favicon-16x16.png'%}">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="{% static 'classes/images/icons/ms-icon-144x144.png' %}">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'classes/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="{% static 'classes/vendor/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'classes/css/agency.min.css' %}" rel="stylesheet">
+
+  </head>
+
+  <body id="page-top">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="#page-top">ClassMaps</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          Menu
+          <i class="fa fa-bars"></i>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav text-uppercase ml-auto">
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#about">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#timeline">Timeline</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#team">Team</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#docs">Docs</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="masthead">
+      <div class="container">
+        <div class="intro-text">
+          <div class="intro-heading text-uppercase">ClassMaps</div>
+          <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="https://classmaps.herokuapp.com/">Explore</a>
+        </div>
+      </div>
+    </header>
+    
+    <!-- About -->
+    <section class="bg-light" id="about">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 text-center">
+            <h2 class="section-heading text-uppercase">About</h2>
+            <h3 class="section-subheading text-muted">ClassMaps is a Princeton webapp makes it easy to find classes, resources, and places on campus. </h3>
+          </div>
+        </div>
+        <div class="row text-center">
+          <div class="col-md-4">
+            <span class="fa-stack fa-4x">
+              <i class="fa fa-circle fa-stack-2x text-primary"></i>
+              <i class="fa fa-search fa-stack-1x fa-inverse"></i>
+            </span>
+            <h4 class="service-heading">Searching</h4>
+            <p class="text-muted">We allow users to quickly and efficiently find the location of their classes without the hassle of separately looking up their class and the building it is located in. </p>
+          </div>
+          <div class="col-md-4">
+            <span class="fa-stack fa-4x">
+              <i class="fa fa-circle fa-stack-2x text-primary"></i>
+              <i class="fa fa-map-marker fa-stack-1x fa-inverse"></i>
+            </span>
+            <h4 class="service-heading">Saving</h4>
+            <p class="text-muted">Users can save all of their classes so that they will always have the location of their classes on hand using their Princeton Account</p>
+          </div>
+          <div class="col-md-4">
+            <span class="fa-stack fa-4x">
+              <i class="fa fa-circle fa-stack-2x text-primary"></i>
+              <i class="fa fa-laptop fa-stack-1x fa-inverse"></i>
+            </span>
+            <h4 class="service-heading">Overlays and Heatmap</h4>
+            <p class="text-muted">Additional features include campus resource overlays (printers, laundry, etc) and a heatmap of the number of students in each building. </p>
+          </div>
+        </div>
+      </div>
+      <br>
+      <br>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 text-center">
+            <h2 class="section-heading text-uppercase">Elevator Pitch</h2>
+            <br>
+            <h3 class="text">Why ClassMaps?</h3>
+          </div>
+        </div>
+        <p class = "text-muted"> ClassMaps is a web application that gives Princeton students and easy way to find the location of their classes, as well as other resources and places on campus. The current methods of doing this are limited and decentralized. Normally, students have to go through a two step process of searching for a class on course offerings, and then looking up the location on Google or Princeton map, but ClassMaps bridges those two steps into a singular process. ClassMaps will give Princeton students a platform to quickly see where and when classes of interest meet. </p>
+        <p class = "text-muted"> Unlike previous course offering projects which are used primarily during course selection, we envision ClassMaps to be used even after sporadically to find event locations, resources, and other precepts. However, we primarily target ClassMaps at underclassmen, and for use during the first couple weeks of classes when people need to remember where their classes are. </p>
+      </div>
+
+    </section>
+
+    <!-- Timeline -->
+    <section id="timeline">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 text-center">
+            <h2 class="section-heading text-uppercase">Timeline</h2>
+            <h3 class="section-subheading text-muted">Our Week-by-Week Progress</h3>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <ul class="timeline">
+              <li>
+                <div class="timeline-image">
+                  <img class="rounded-circle img-fluid" src="{% static 'classes/img/about/scraping.png' %}" alt="">
+                </div>
+                <div class="timeline-panel">
+                  <div class="timeline-heading">
+                    <h4>Week of March 26th</h4>
+                  </div>
+                  <div class="timeline-body">
+                    <p class="text-muted">Created Python script to scrape building/class data to put into a Postgres database, used Leaflet/JS to build a map with basic features, began implementing searching.</p>
+                  </div>
+                </div>
+              </li>
+              <li class="timeline-inverted">
+                <div class="timeline-image">
+                  <img class="rounded-circle img-fluid" src="{% static 'classes/img/about/heroku.png' %}" alt="">
+                </div>
+                <div class="timeline-panel">
+                  <div class="timeline-heading">
+                    <h4>Week of April 2nd</h4>
+                  </div>
+                  <div class="timeline-body">
+                    <p class="text-muted">Started hosting the site on Heroku, linked the frontend map design and the backend database using the Django framework and implemented a search bar feature to query the database and maps a result to the map. </p>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="timeline-image">
+                  <img class="rounded-circle img-fluid" src="{% static 'classes/img/about/overlays.png' %}" alt="">
+                </div>
+                <div class="timeline-panel">
+                  <div class="timeline-heading">
+                    <h4>Week of April 9th</h4>
+                  </div>
+                  <div class="timeline-body">
+                    <p class="text-muted">Restructured search logic to improve searching, refined searching by adding filters by day/time, added resource overlays to the map</p>
+                  </div>
+                </div>
+              </li>
+              <li class="timeline-inverted">
+                <div class="timeline-image">
+                  <img class="rounded-circle img-fluid" src="{% static 'classes/img/about/filters.png' %}" alt="">
+                </div>
+                <div class="timeline-panel">
+                  <div class="timeline-heading">
+                    <h4>Week of April 16th</h4>
+                  </div>
+                  <div class="timeline-body">
+                    <p class="text-muted">Fixed bugs regarding search filters, set up CAS authentication, added function to save/favorite classes, and improved the UI substantially (fullscreen map, overlays). </p>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="timeline-image">
+                  <img class="mx-auto rounded-circle img-fluid" src="{% static 'classes/img/about/saving.png' %}" alt="">
+                </div>
+                <div class="timeline-panel">
+                  <div class="timeline-heading">
+                    <h4>Week of April 23rd</h4>
+                  </div>
+                  <div class="timeline-body">
+                    <p class="text-muted">Added overlay to display saved classes, implemented a function to search by clicking on a building, added additional buttons to the map, and eliminated pesky bugs.</p>
+                  </div>
+                </div>
+              </li>
+              <li class="timeline-inverted">
+                <div class="timeline-image">
+                  <img class="rounded-circle img-fluid" src="{% static 'classes/img/about/heatmap.png' %}" alt="">
+                </div>
+                <div class="timeline-panel">
+                  <div class="timeline-heading">
+                    <h4>Week of April 30th</h4>
+                  </div>
+                  <div class="timeline-body">
+                    <p class="text-muted">Implemented a heatmap to indicate the number of students in each building, refined search results page to display as an overlay, substantially improved UI based on user feedback.</p>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="timeline-image">
+                  <img class="rounded-circle img-fluid" src="{% static 'classes/img/about/usg.png' %}" alt="">
+                </div>
+                <div class="timeline-panel">
+                  <div class="timeline-heading">
+                    <h4>Week of May 7th</h4>
+                  </div>
+                  <div class="timeline-body">
+                    <p class="text-muted">Presented our project, finished up our documentation. In talks with USG TigerApps and OIT for future plans.</p>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Team -->
+    <section class="bg-light" id="team">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 text-center">
+            <h2 class="section-heading text-uppercase">Meet the Team!</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="team-member">
+              <img class="mx-auto rounded-circle" src="{% static 'classes/img/about/adrian.jpg' %}" alt="Picture of Adrian Tong">
+              <h4>Adrian Tong</h4>
+              <p class="text-muted">Project Manager</p>
+              <ul class="list-inline social-buttons">
+                <li class="list-inline-item">
+                  <a href="https://www.linkedin.com/in/adrian-tong/"target="_blank">
+                    <i class="fa fa-linkedin"></i>
+                  </a>
+                </li>
+                <li class="list-inline-item">
+                  <a href="mailto:atong@princeton.edu">
+                    <i class="fa fa-envelope"></i>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="team-member">
+              <img class="mx-auto rounded-circle" src="{% static 'classes/img/about/david.jpg' %}" alt="Picture of David Todd">
+              <h4>David Todd</h4>
+              <p class="text-muted">Back-End Developer</p>
+              <ul class="list-inline social-buttons">
+                <li class="list-inline-item">
+                  <a href="https://www.linkedin.com/in/david-todd-b73938102/"target="_blank">
+                    <i class="fa fa-linkedin"></i>
+                  </a>
+                </li>
+                <li class="list-inline-item">
+                  <a href="mailto:dtodd@princeton.edu">
+                    <i class="fa fa-envelope"></i>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="team-member">
+              <img class="mx-auto rounded-circle" src="{% static 'classes/img/about/yang.jpg' %}" alt="Picture of Yang Song">
+              <h4>Yang Song</h4>
+              <p class="text-muted">Front-End Developer</p>
+              <ul class="list-inline social-buttons">
+                <li class="list-inline-item">
+                  <a href="https://www.linkedin.com/in/yangsong97/"target="_blank">
+                    <i class="fa fa-linkedin"></i>
+                  </a>
+                </li>
+                <li class="list-inline-item">
+                  <a href="mailto:yangsong@princeton.edu">
+                    <i class="fa fa-envelope"></i>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="team-member">
+              <img class="mx-auto rounded-circle" src="{% static 'classes/img/about/andyl.jpg' %}" alt="Picture of Andy Lin">
+              <h4>Andy Lin</h4>
+              <p class="text-muted">Front-End Developer</p>
+              <ul class="list-inline social-buttons">
+                <li class="list-inline-item">
+                  <a href="mailto:andyl@princeton.edu">
+                    <i class="fa fa-envelope"></i>
+                  </a>
+                </li>
+              </ul>              
+            </div>
+          </div>
+          <div class="col-sm-4" >
+            <div class="team-member">
+              <img class="mx-auto rounded-circle" src="{% static 'classes/img/about/jerry.jpg' %}" alt="Picture of Jerry Wei">
+              <h4>Jerry Wei</h4>
+              <p class="text-muted">Advisor</p>
+              <ul class="list-inline social-buttons">
+                <li class="list-inline-item">
+                  <a href="https://www.linkedin.com/in/jerryycwei/"target="_blank">
+                    <i class="fa fa-linkedin"></i>
+                  </a>
+                </li>
+                <li class="list-inline-item">
+                  <a href="mailto:jywei@princeton.edu">
+                    <i class="fa fa-envelope"></i>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-sm-4" >
+            <div class="team-member">
+              <img class="mx-auto rounded-circle" src="{% static 'classes/img/about/brian2.jpg' %}" alt="Picture of Brian Kernighan">
+              <h4>Brian Kernighan</h4>
+              <p class="text-muted">Instructor</p>
+              <ul class="list-inline social-buttons">
+                <li class="list-inline-item">
+                  <a href="mailto:bwk@cs.princeton.edu">
+                    <i class="fa fa-envelope"></i>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+        <!-- Documentation -->
+    <section class="bg-light" id="docs">
+        <div class="row">
+          <div class="col-lg-12 text-center">
+            <h2 class="section-heading text-uppercase">Documentation</h2>
+          </div>
+        </div>
+      <div class="col-lg-12 text-center">
+        <h2 class="text"><a href="{% static 'classes/desdoc.pdf' %}">Design Document</a></h2>
+        <h2 class="text"><a href="{% static 'classes/report.pdf' %}">Final Report</a></h2>
+        <h2 class="text"><a href="{% static 'classes/productguide.pdf' %}">Product Guide</a></h2>
+      </div>     
+    </section>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="{% static 'classes/vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'classes/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="{% static 'classes/vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+
+    <!-- Contact form JavaScript -->
+    <script src="{% static 'classes/js/jqBootstrapValidation.js' %}"></script>
+    <script src="{% static 'classes/js/contact_me.js' %}"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="{% static 'classes/js/agency.min.js' %}"></script>
+
+  </body>
+
+</html>
