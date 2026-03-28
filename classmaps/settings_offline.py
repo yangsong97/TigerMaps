@@ -55,13 +55,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-MIDDLEWARE_CLASSES = [
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django_cas_ng.middleware.CASMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-]
-
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'django_cas_ng.backends.CASBackend',
@@ -131,6 +124,8 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CAS_SERVER_URL = 'https://fed.princeton.edu/cas/'
 CAS_REDIRECT_URL = 'https://classmaps.herokuapp.com/'
