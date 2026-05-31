@@ -1,17 +1,67 @@
 {% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>ClassMaps - Login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TigerMaps — Log in</title>
     <link rel="stylesheet" href="{% static 'classes/vendor/bootstrap/css/bootstrap.min.css' %}">
     <style>
-        body { background: #f5f5f5; }
-        .login-form { max-width: 400px; margin: 100px auto; padding: 30px; background: #fff; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        :root { --tiger-orange: #e77500; }
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(160deg, #1f1f1f, #111111);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+        .login-card {
+            width: 100%;
+            max-width: 380px;
+            margin: 24px;
+            padding: 36px 32px;
+            background: #ffffff;
+            border-radius: 14px;
+            box-shadow: 0 18px 48px rgba(0, 0, 0, 0.45);
+        }
+        .brand {
+            text-align: center;
+            margin-bottom: 4px;
+            font-size: 30px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+        .brand .tiger { color: var(--tiger-orange); }
+        .brand .maps { color: #111111; }
+        .subtitle {
+            text-align: center;
+            color: #777;
+            font-size: 14px;
+            margin-bottom: 26px;
+        }
+        .login-card label { font-weight: 600; font-size: 13px; color: #333; }
+        .login-card .form-control { border-radius: 8px; }
+        .btn-tiger {
+            width: 100%;
+            margin-top: 18px;
+            padding: 10px;
+            font-weight: 600;
+            color: #fff;
+            background: var(--tiger-orange);
+            border: none;
+            border-radius: 8px;
+        }
+        .btn-tiger:hover { background: #c8651b; color: #fff; }
+        .hint { text-align: center; font-size: 12px; color: #999; margin-top: 18px; }
+        .hint a { color: var(--tiger-orange); text-decoration: none; }
     </style>
 </head>
 <body>
-    <div class="login-form">
-        <h2 class="text-center mb-4">ClassMaps Login</h2>
+    <div class="login-card">
+        <div class="brand"><span class="tiger">Tiger</span><span class="maps">Maps</span></div>
+        <div class="subtitle">Princeton course &amp; campus map</div>
         {% if form.errors %}
         <div class="alert alert-danger">Invalid username or password.</div>
         {% endif %}
@@ -25,9 +75,10 @@
                 <label for="id_password">Password</label>
                 <input type="password" name="password" id="id_password" class="form-control" required>
             </div>
-            <button type="submit" class="btn btn-primary btn-block mt-4 w-100">Sign In</button>
+            <button type="submit" class="btn btn-tiger">Sign in</button>
             <input type="hidden" name="next" value="{{ next }}">
         </form>
+        <div class="hint">Just exploring? <a href="/">Browse the map without an account →</a></div>
     </div>
 </body>
 </html>

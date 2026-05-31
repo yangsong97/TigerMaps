@@ -1,0 +1,155 @@
+/* TigerMaps — Princeton orange & black theme.
+ *
+ * Cosmetic overrides layered on top of the existing inline styles in
+ * index.html. Uses !important so it wins regardless of stylesheet order and
+ * over element-level inline colors; intentionally only touches colors, fonts,
+ * borders, radius and shadows so the map's layout/positioning is untouched.
+ */
+
+:root {
+  --tiger-orange: #e77500;       /* Princeton orange */
+  --tiger-orange-dark: #c8651b;
+  --tiger-ink: #111111;
+  --tiger-ink-2: #1f1f1f;
+}
+
+body,
+.card,
+.sideOverlay a,
+.listText,
+input,
+select,
+textarea,
+button {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Helvetica, Arial, sans-serif !important;
+}
+
+/* ---- Top search bar -------------------------------------------------- */
+.overlay {
+  background: rgba(17, 17, 17, 0.82) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  backdrop-filter: blur(8px) !important;
+  border-bottom: 2px solid var(--tiger-orange) !important;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35) !important;
+}
+#search {
+  color: #ffffff !important;
+  letter-spacing: 0.2px !important;
+}
+.overlay ::placeholder {
+  color: #c9c9c9 !important;
+}
+
+/* ---- Side menu ------------------------------------------------------- */
+.sideOverlay {
+  background: linear-gradient(160deg, var(--tiger-ink-2), var(--tiger-ink)) !important;
+}
+.sideOverlay a {
+  color: #f1f1f1 !important;
+  border-left: 3px solid transparent !important;
+}
+.sideOverlay a:hover {
+  color: var(--tiger-orange) !important;
+  background: rgba(231, 117, 0, 0.1) !important;
+  border-left-color: var(--tiger-orange) !important;
+}
+.sideOverlay .closebtn,
+.sideOverlay .closebtn:hover {
+  color: #8a8a8a !important;
+  background: transparent !important;
+  border-left: none !important;
+}
+.sideOverlay footer,
+.sideOverlay footer p,
+.sideOverlay footer a {
+  color: #9a9a9a !important;
+}
+
+/* ---- Favorites list -------------------------------------------------- */
+.listOverlay {
+  background: #ffffff !important;
+  border-radius: 10px !important;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.18) !important;
+}
+.listTitle {
+  color: var(--tiger-orange) !important;
+  font-weight: 700 !important;
+}
+
+/* ---- Search-result cards -------------------------------------------- */
+.resultsOverlay {
+  background: transparent !important;
+}
+.card {
+  border: none !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12) !important;
+  transition: transform 0.15s ease, box-shadow 0.15s ease !important;
+}
+.card:hover {
+  transform: translateY(-3px) !important;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.18) !important;
+}
+
+/* ---- Buttons -------------------------------------------------------- */
+.btn-success {
+  background: var(--tiger-orange) !important;
+  border-color: var(--tiger-orange) !important;
+  color: #ffffff !important;
+  border-radius: 8px !important;
+}
+.btn-success:hover {
+  background: var(--tiger-orange-dark) !important;
+  border-color: var(--tiger-orange-dark) !important;
+}
+.btn-remove {
+  border-radius: 8px !important;
+}
+
+/* ---- Date filter dropdown ------------------------------------------- */
+.dropdown-menu {
+  background: #ffffff !important;
+  border: none !important;
+  border-radius: 10px !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18) !important;
+}
+.slider {
+  color: #222222 !important;
+}
+
+/* ---- jQuery UI autocomplete ----------------------------------------- */
+.ui-autocomplete {
+  background: #ffffff !important;
+  border: none !important;
+  border-radius: 10px !important;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.18) !important;
+  padding: 6px !important;
+  overflow: hidden !important;
+}
+.ui-autocomplete .ui-menu-item-wrapper {
+  border-radius: 6px !important;
+  padding: 8px 10px !important;
+  border: none !important;
+}
+.ui-menu .ui-menu-item-wrapper.ui-state-active,
+.ui-autocomplete .ui-state-focus,
+.ui-autocomplete .ui-state-active {
+  background: var(--tiger-orange) !important;
+  color: #ffffff !important;
+  border: none !important;
+  margin: 0 !important;
+}
+
+/* ---- Leaflet popups & controls ------------------------------------- */
+.leaflet-popup-content-wrapper {
+  border-radius: 12px !important;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.25) !important;
+}
+.leaflet-bar a {
+  color: #222222 !important;
+}
+.leaflet-bar a:hover {
+  background: var(--tiger-orange) !important;
+  color: #ffffff !important;
+}
