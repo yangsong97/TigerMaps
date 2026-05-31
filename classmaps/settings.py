@@ -76,7 +76,9 @@ DATABASES = {
     )
 }
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+# AutoField matches the primary keys pinned in classes/migrations/0001_initial
+# and the existing live database, avoiding a spurious "alter id" migration.
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
@@ -91,7 +93,10 @@ USE_I18N = True
 USE_TZ = True
 
 CAS_SERVER_URL = 'https://fed.princeton.edu/cas/'
-CAS_REDIRECT_URL = os.environ.get('CAS_REDIRECT_URL', 'https://classmaps.herokuapp.com/')
+# Default to a relative path so a successful login returns to this app's own
+# home page on whatever host it is deployed to. (The previous default pointed
+# at the retired classmaps.herokuapp.com domain, stranding users after login.)
+CAS_REDIRECT_URL = os.environ.get('CAS_REDIRECT_URL', '/')
 LOGIN_URL = os.environ.get('LOGIN_URL', '/accounts/login')
 CAS_VERSION = '3'
 

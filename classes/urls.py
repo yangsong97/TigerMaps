@@ -5,9 +5,11 @@ import django_cas_ng.views
 
 app_name = 'classes'
 urlpatterns = [
-    re_path('^accounts/login$', django_cas_ng.views.login, name='cas_ng_login'),
-    re_path('^accounts/logout$', django_cas_ng.views.logout, name='cas_ng_logout'),
-    re_path('^accounts/callback$', django_cas_ng.views.callback, name='cas_ng_proxy_callback'),
+    # django_cas_ng 5.x exposes class-based views; the old function-based
+    # views (django_cas_ng.views.login/logout/callback) were removed.
+    re_path('^accounts/login$', django_cas_ng.views.LoginView.as_view(), name='cas_ng_login'),
+    re_path('^accounts/logout$', django_cas_ng.views.LogoutView.as_view(), name='cas_ng_logout'),
+    re_path('^accounts/callback$', django_cas_ng.views.CallbackView.as_view(), name='cas_ng_proxy_callback'),
     re_path('^$', views.index, name="index"),
     re_path('^remove/$', views.remove, name="remove"),
     re_path('^save/$', views.save, name="save"),

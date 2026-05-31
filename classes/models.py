@@ -3,15 +3,16 @@ from datetime import datetime
 import json
 import re
 
-try:
-    from django.contrib.postgres.fields import ArrayField
-    HAS_POSTGRES = True
-except ImportError:
-    HAS_POSTGRES = False
-
 
 class JSONArrayField(models.TextField):
-    """Fallback for ArrayField when PostgreSQL is not available."""
+    """Stores a list of strings as a JSON-encoded text column.
+
+    Using a plain text column keeps the schema identical on both SQLite
+    (local development) and PostgreSQL (production). The app only ever
+    appends to / removes from / membership-tests these lists in Python, so
+    a native PostgreSQL ArrayField would add a backend-specific column type
+    (and migration) for no functional gain.
+    """
     def from_db_value(self, value, expression, connection):
         if value is None:
             return []
@@ -73,12 +74,7 @@ class Section(models.Model):
     def __str__(self):
         return self.listings[1:]
 
-if HAS_POSTGRES:
-    _array_field = lambda: ArrayField(models.CharField(max_length=10, blank=True, null=True), default=list)
-else:
-    _array_field = lambda: JSONArrayField(default='[]')
-
 class User(models.Model):
     netid = models.CharField(max_length=20, blank=True, null=True)
-    courses = _array_field()
-    buildings = _array_field()
+    courses = JSONArrayField(default='[]')
+    buildings = JSONArrayField(default='[]')
