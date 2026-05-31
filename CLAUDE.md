@@ -35,6 +35,9 @@ python manage.py makemigrations --check --dry-run --settings=classmaps.settings_
 
 # Run the dev server
 python manage.py runserver --settings=classmaps.settings_local
+
+# Seed demo data (Princeton buildings + course sections) from scraping/*.json
+python manage.py seed_demo --settings=classmaps.settings_local
 ```
 
 ## Data model
@@ -58,6 +61,20 @@ Lives in `classes/views.py` (`search_terms`, `search_day`, `search_time`,
 `parse_terms`). It is regex-driven over building name aliases and course
 listings; `search_day` uses `T(?!h)` so a Tuesday filter does not match a
 Thursday-only class. This logic is covered by `classes/tests.py`.
+
+## Public demo & access
+
+Viewing is public: `index`, `search`, `query`, `enroll`, and the detail views
+have no `@login_required`. Anonymous requests resolve to `netid = None` (see
+`_current_netid` in `views.py`) and get no saved locations. Only `save`,
+`remove`, and `saved_locations` require login (Princeton CAS in production).
+Templates gate user-specific UI with `{% if netid %}` and show a "Log in with
+Princeton" link otherwise.
+
+`seed_demo` populates the demo from `scraping/*.json`; `build.sh` runs it on
+every deploy (idempotent). The Princeton orange/black look is layered on via
+`classes/static/classes/theme.css` (cosmetic `!important` overrides — keep map
+layout/positioning out of it).
 
 ## Gotchas
 

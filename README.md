@@ -38,14 +38,19 @@ pip install -r requirements.txt
 # 2. Apply migrations (creates db.sqlite3)
 python manage.py migrate --settings=classmaps.settings_local
 
-# 3. Create a login account
-python manage.py createsuperuser --settings=classmaps.settings_local
+# 3. Seed real Princeton building/course data so the map has content
+python manage.py seed_demo --settings=classmaps.settings_local
 
 # 4. Run the development server
 python manage.py runserver --settings=classmaps.settings_local
+
+# 5. (optional) Create an account to test saving favorites
+python manage.py createsuperuser --settings=classmaps.settings_local
 ```
 
-Then visit http://127.0.0.1:8000/ and log in with the account you created.
+Then visit http://127.0.0.1:8000/ — the map is a **public demo**, so you can
+explore and search right away. Logging in (step 5) is only needed to save
+favorites.
 
 To avoid repeating `--settings` on every command, you can export it for the session:
 
@@ -53,9 +58,10 @@ To avoid repeating `--settings` on every command, you can export it for the sess
 export DJANGO_SETTINGS_MODULE=classmaps.settings_local
 ```
 
-The local database starts empty. To populate it with real course and building
-data, see [Updating the data](#updating-the-data) or load the JSON in `scraping/`
-with `manage.py loaddata`.
+`seed_demo` reads the scraped JSON in `scraping/` (≈300 buildings and the
+current course offerings) and is idempotent — it is a no-op once data exists,
+so it is safe to re-run. Pass `--force` to wipe and reseed. To refresh the
+underlying data from the registrar, see [Updating the data](#updating-the-data).
 
 ## Running the tests
 
@@ -83,6 +89,19 @@ Environment variables read by `classmaps/settings.py`:
 | `ALLOWED_HOSTS`           | Extra comma-separated hosts to allow                           |
 | `CAS_REDIRECT_URL`        | Where to send users after CAS login (defaults to `/`)          |
 | `LOGIN_URL`               | Login URL (defaults to `/accounts/login`)                      |
+| `CSRF_TRUSTED_ORIGINS`    | Extra comma-separated HTTPS origins to trust for form POSTs    |
+
+`build.sh` also runs `seed_demo`, so the database is populated automatically on
+the first deploy.
+
+### Access model
+
+The map, search, and building/course details are **public** — anyone can
+explore the demo without logging in. Logging in with **Princeton CAS** is only
+required to save favorites, and the "Log in with Princeton" button is wired up
+for that. Note that CAS only works once Princeton OIT has registered the
+deployment's URL as an authorized service; until then the public demo is fully
+usable on its own.
 
 ## Updating the data
 
