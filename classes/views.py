@@ -9,7 +9,16 @@ from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.urls import reverse
 import json
 
-@login_required
+
+def _current_netid(request):
+    """Return the netid for an authenticated user, or None for anonymous
+    visitors. Anonymous visitors get full read-only access to the public
+    demo; only saving locations requires logging in with Princeton CAS."""
+    if request.user.is_authenticated:
+        return request.user.username
+    return None
+
+
 def query(request):
     # Format matches to a search query as a JSON file
     query, time, dayString, courses, buildings, names = parse_terms(request)
@@ -35,7 +44,7 @@ def query(request):
     mimetype = 'application/json'
     return HttpResponse(data, mimetype)
 
-@login_required
+# Return the number of classes and enrollment for each building at the time queried
 def enroll(request):
     # Return the number of classes and enrollment for each building at the time queried
     query, time, dayString, courses, buildings, names = parse_terms(request)
@@ -137,11 +146,9 @@ def save(request):
         update_result(netid, True, (save_id[-1] == 'c'), save_id[:-1])
     return HttpResponseRedirect(reverse('classes:saved_locations'))
 
-@login_required
 def index(request):
-    netid = request.user.username
-    newUser = create_user(netid)
-    user = User.objects.get(netid=netid)
+    netid = _current_netid(request)
+    newUser = create_user(netid) if netid else 0
     context = {
         'netid': netid,
         'newUser': newUser,
@@ -150,11 +157,10 @@ def index(request):
     return render(request, 'classes/index.html', context)
 
 # Return matches to a query
-@login_required
 def details(request, id, isCourse):
-    netid = request.user.username
-    create_user(netid)
-    user = User.objects.get(netid=netid)
+    netid = _current_netid(request)
+    if netid:
+        create_user(netid)
     context = {
         'netid': netid
     }
@@ -166,11 +172,9 @@ def details(request, id, isCourse):
     return render(request, 'classes/index.html', context)
 
 
-@login_required
 def course_details(request, id):
     return details(request, id, isCourse=True)
 
-@login_required
 def building_details(request, id):
     return details(request, id, isCourse=False)
 
@@ -315,21 +319,26 @@ def parse_terms(request):
 
     return(query, time, dayString, resultsFiltered, buildings, names)
 
-@login_required
 def search(request):
     template = 'classes/index.html'
     query, time, dayString, resultsFiltered, buildings, names = parse_terms(request)
 
-    netid = request.user.username
-    create_user(netid)
-    user = User.objects.get(netid=netid)
+    netid = _current_netid(request)
+    if netid:
+        create_user(netid)
+        user = User.objects.get(netid=netid)
+        saved_courses = Section.objects.filter(id__in=user.courses)
+        saved_buildings = Building.objects.filter(id__in=user.buildings)
+    else:
+        saved_courses = Section.objects.none()
+        saved_buildings = Building.objects.none()
 
     context = {
         'q': query,
         't': time,
         'd': dayString,
-        'saved_courses': Section.objects.filter(id__in=user.courses),
-        'saved_buildings': Building.objects.filter(id__in=user.buildings),
+        'saved_courses': saved_courses,
+        'saved_buildings': saved_buildings,
         'netid': netid
     }
     context['num_matches'] = len(resultsFiltered) + len(buildings)

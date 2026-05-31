@@ -21,6 +21,14 @@ if DEBUG:
     ALLOWED_HOSTS.append('localhost')
     ALLOWED_HOSTS.append('127.0.0.1')
 
+# Trust the deployed HTTPS origin for CSRF-protected POSTs (admin, saving, etc.).
+CSRF_TRUSTED_ORIGINS = []
+if RENDER_EXTERNAL_HOSTNAME:
+    CSRF_TRUSTED_ORIGINS.append('https://' + RENDER_EXTERNAL_HOSTNAME)
+_csrf_extra = os.environ.get('CSRF_TRUSTED_ORIGINS', '')
+if _csrf_extra:
+    CSRF_TRUSTED_ORIGINS.extend(_csrf_extra.split(','))
+
 INSTALLED_APPS = [
     'classes',
     'django.contrib.admin',

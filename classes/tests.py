@@ -6,8 +6,10 @@ requirements of the production configuration:
     python manage.py test --settings=classmaps.settings_local
 """
 from datetime import time
+from io import StringIO
 
 from django.contrib.auth import get_user_model
+from django.core.management import call_command
 from django.test import TestCase
 from django.urls import reverse
 
@@ -176,14 +178,34 @@ class SearchTimeAndDayStringTests(TestCase):
 
 
 class ViewAuthTests(TestCase):
-    def test_index_requires_login(self):
+    """The map is a public demo: viewing is open to anonymous visitors;
+    only user-specific actions (saving) require a Princeton login."""
+
+    def test_index_is_public(self):
         response = self.client.get(reverse("classes:index"))
-        self.assertEqual(response.status_code, 302)
-        self.assertIn("/accounts/login", response["Location"])
+        self.assertEqual(response.status_code, 200)
+
+    def test_search_is_public(self):
+        response = self.client.get(reverse("classes:search"), {"q": "COS"})
+        self.assertEqual(response.status_code, 200)
+
+    def test_query_api_is_public(self):
+        response = self.client.get(reverse("classes:query"), {"q": "COS"})
+        self.assertEqual(response.status_code, 200)
 
     def test_about_is_public(self):
         response = self.client.get("/about/")
         self.assertEqual(response.status_code, 200)
+
+    def test_saved_locations_requires_login(self):
+        response = self.client.get(reverse("classes:saved_locations"))
+        self.assertEqual(response.status_code, 302)
+        self.assertIn("/accounts/login", response["Location"])
+
+    def test_save_requires_login(self):
+        response = self.client.post(reverse("classes:save"), {"s": "1b"})
+        self.assertEqual(response.status_code, 302)
+        self.assertIn("/accounts/login", response["Location"])
 
 
 class SaveFlowTests(TestCase):
@@ -257,3 +279,20 @@ class QueryApiTests(TestCase):
         data = response.json()
         self.assertEqual(data["Frist Campus Center"]["students"], 100)
         self.assertEqual(data["Frist Campus Center"]["courses"], 1)
+
+
+class SeedDemoCommandTests(TestCase):
+    def test_seed_demo_populates_buildings_and_sections(self):
+        call_command("seed_demo", "--max-courses", "50", stdout=StringIO())
+        self.assertTrue(Building.objects.exists())
+        self.assertTrue(Section.objects.exists())
+        # Sections built from real meeting data should resolve to buildings.
+        self.assertTrue(Section.objects.exclude(building__isnull=True).exists())
+
+    def test_seed_demo_is_idempotent(self):
+        out = StringIO()
+        call_command("seed_demo", "--max-courses", "20", stdout=out)
+        before = Section.objects.count()
+        call_command("seed_demo", "--max-courses", "20", stdout=out)
+        self.assertEqual(Section.objects.count(), before)
+        self.assertIn("skipping", out.getvalue().lower())
