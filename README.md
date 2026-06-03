@@ -17,6 +17,16 @@ printers, water fountains, and study hotspots.
 > TigerMaps is a fork of [ClassMaps](https://github.com/DavidTodd26/ClassMaps),
 > updated to run on a modern Django stack and deploy on [Render](https://render.com).
 
+## One-click deploy
+
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/yangsong97/tigermaps)
+
+Clicking the button reads [`render.yaml`](render.yaml) and provisions a managed
+PostgreSQL database plus a Python web service. The build step runs migrations
+and seeds the Princeton building/course data, so the live site comes up as a
+working public demo with no further configuration. (You'll need a free Render
+account, and the first build takes a few minutes.)
+
 ## Tech stack
 
 - **Backend:** Django 4.2 (Python 3.11)
